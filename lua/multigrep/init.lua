@@ -8,7 +8,7 @@ local multigrep = function(opts)
   opts.cwd = opts.cwd or vim.uv.cwd()
 
   local finder = finders.new_async_job {
-    commultigrepmand_generator = function(prompt)
+    command_generator = function(prompt)
       if not prompt or prompt == "" then
         return nil
       end
@@ -26,7 +26,7 @@ local multigrep = function(opts)
       end
 
 
-      ---@diagnostic disable-next-line: deprecated
+     ---@diagnostic disable-next-line: deprecated 
       return vim.tbl_flatten {
         args,
         { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
@@ -49,9 +49,9 @@ local M = {}
 
 local config = {}
 M.setup = function(opts)
-  if opts then
-    config = vim.tbl_extend("force", config, opts)
-  end
+	if opts then
+		config = vim.tbl_extend("force", config, opts)
+	end
 end
 
 M.live_multigrep = function(opts)
