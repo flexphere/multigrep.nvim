@@ -26,7 +26,7 @@ local multigrep = function(opts)
       end
 
 
-     ---@diagnostic disable-next-line: deprecated 
+      ---@diagnostic disable-next-line: deprecated
       return vim.tbl_flatten {
         args,
         { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
@@ -46,6 +46,13 @@ local multigrep = function(opts)
 end
 
 local M = {}
+
+local config = {}
+M.setup = function(opts)
+  if opts then
+    config = vim.tbl_extend("force", config, opts)
+  end
+end
 
 M.live_multigrep = function(opts)
   multigrep(opts)
